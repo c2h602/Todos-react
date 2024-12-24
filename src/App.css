@@ -1,0 +1,73 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.45);
+  padding: 2em;
+  border-radius: 10px;
+  width: 20rem;
+}
+
+.input {
+  border-radius: 10px;
+  padding: 0.5em 1.2em;
+  border: 1px solid;
+  border-color: transparent;
+  margin-left: 1.2em;
+  font-size: 1em;
+  color: #e0a800;
+  background-color: rgba(255, 255, 255, 0.541);
+  width: 10rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.input__panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.input:hover,
+.input:focus {
+  background-color: rgba(255, 255, 255, 0.623);
+  outline: none;
+}
+
+::placeholder {
+  color: hsl(0, 12%, 87%);
+}
+
+.item {
+  list-style-type: none;
+  font-weight: 400;
+  color: #e0a800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1.2em; 
+  max-width: 16rem; 
+  width: 100%;
+}
+
+.card__list {
+  text-align: start;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column; 
+  padding-left: 1.2em; 
+}
+
+.activeBtn {
+  margin: 1em;
+}
+
+.addBtn {
+  margin-right: 1.2em;
+}

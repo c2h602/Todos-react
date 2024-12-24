@@ -1,0 +1,44 @@
+:root {
+  font-family: "IBM Plex Mono", monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+  /* Mango Gradient */
+  background: #ffe259, #ffa751;
+  background: -webkit-linear-gradient(90deg, #ffe259, #ffa751);
+  background: linear-gradient(90deg, #ffe259, #ffa751);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: white;
+  font-family: "Doto", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 0.4em 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  color: #e0a800;
+  background-color: rgba(255, 255, 255, 0.541);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  background-color: rgba(255, 255, 255, 0.623);
+}
