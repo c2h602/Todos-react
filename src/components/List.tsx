@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Button from "./Button";
+import { useMemo } from "react";
 
 interface ITodo {
   id: number;
   text: string;
-  status: 'active' | 'done';
+  status: "active" | "done";
 }
 
 export default function List() {
@@ -12,48 +13,63 @@ export default function List() {
   const [newTodo, setNewTodo] = useState<string>("");
   const [filter, setFilter] = useState<"all" | "active" | "done">("all");
 
-  function addTodo() {
+  const setAllFilter = useCallback(() => setFilter("all"), []);
+  const setActiveFilter = useCallback(() => setFilter("active"), []);
+  const setDoneFilter = useCallback(() => setFilter("done"), []);
+
+  const addTodo = useCallback(() => {
     if (newTodo.trim() === "") return;
 
-    const newTask: ITodo = { 
-      id: todos.length, 
-      text: newTodo.trim(), 
-      status: "active" 
+    const newTask: ITodo = {
+      id: todos.length,
+      text: newTodo.trim(),
+      status: "active",
     };
 
-    setTodos(todos => [newTask, ...todos]);
+    setTodos((todos) => [newTask, ...todos]);
     setNewTodo("");
-  };
+  }, [newTodo]);
 
-  function removeTodo(todoId: number) {
-    const updatedTodo = todos.filter((todo) => todo.id !== todoId);
-    setTodos(updatedTodo);
-  };
+  const removeTodo = useCallback(
+    (todoId: number) => {
+      const updatedTodo = todos.filter((todo) => todo.id !== todoId);
+      setTodos(updatedTodo);
+    },
+    [todos]
+  );
 
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === 'all') return true;
-    return todo.status === filter;
-  })
+  // const filteredTodos = todos.filter((todo) => {
+  //   if (filter === "all") return true;
+  //   return todo.status === filter;
+  // });
 
-  function toggleStatus(todoId: number) {
+  const toggleStatus = useCallback((todoId: number) => {
     setTodos((todos) =>
       todos.map((todo) => {
         if (todo.id === todoId) {
-          if (todo.status === 'active') return {...todo, status: 'done'};
+          if (todo.status === "active") return { ...todo, status: "done" };
           else {
-            return {...todo, status: 'active'} 
-          } 
+            return { ...todo, status: "active" };
+          }
         }
 
-      return todo;
-    }))
+        return todo;
+      })
+    );
+  }, []);
 
-  }
+  // фильтрация с использованием useMemo
+
+  const filteredTodos = useMemo(() => {
+    console.log(`useMemo return the filter func`);
+    return todos.filter((todo) => {
+      if (filter === "all") return true;
+      return todo.status === filter;
+    });
+  }, [todos, filter]);
 
   return (
     <>
-      <h1>todos</h1>
-
       <div className="card">
         <div className="input__panel">
           <input
@@ -68,15 +84,14 @@ export default function List() {
 
         <ul className="card__list">
           {filteredTodos.map((todo) => (
-            <li 
-              key={todo.id} 
-              className="item" 
-              onClick={() => {toggleStatus(todo.id)}}>
-
-              {todo.status === "active" 
-                ?  `⬜ ${todo.text}` 
-                : `✅ ${todo.text}`
-              }
+            <li
+              key={todo.id}
+              className="item"
+              onClick={() => {
+                toggleStatus(todo.id);
+              }}
+            >
+              {todo.status === "active" ? `⬜ ${todo.text}` : `✅ ${todo.text}`}
 
               <Button className="removeBtn" onClick={() => removeTodo(todo.id)}>
                 ✖
@@ -85,9 +100,15 @@ export default function List() {
           ))}
         </ul>
       </div>
-      <Button className="allBtn" onClick={() => setFilter("all")}>All</Button>
-      <Button className="activeBtn" onClick={() => setFilter("active")}>Active</Button>
-      <Button className="doneBtn" onClick={() => setFilter("done")}>Done</Button>
+      <Button className="allBtn" onClick={setAllFilter}>
+        All
+      </Button>
+      <Button className="activeBtn" onClick={setActiveFilter}>
+        Active
+      </Button>
+      <Button className="doneBtn" onClick={setDoneFilter}>
+        Done
+      </Button>
     </>
   );
 }
