@@ -54,6 +54,7 @@
   padding: 0.5em 1.2em; 
   max-width: 16rem; 
   width: 100%;
+  word-break: break-all;
 }
 
 .card__list {
@@ -70,4 +71,9 @@
 
 .addBtn {
   margin-right: 1.2em;
+}
+
+.empty__text {
+  color: #e0a800;
+  margin-bottom: 0.5rem;
 }
