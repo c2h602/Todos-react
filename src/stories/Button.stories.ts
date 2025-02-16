@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import { ComponentProps } from "react";
 import Button from "../components/Button";
 import { fn } from '@storybook/test';
+// import { actions } from "@storybook/addon-actions";
 
 import { StoryObj } from "@storybook/react";
 
@@ -13,6 +14,7 @@ const meta: Meta<StoryProps> = {
   args: {
     children: 'Button',
     onClick: fn(),
+    // ...actions('onClick'),
   },
   tags: ['autodocs'],
   
@@ -26,7 +28,7 @@ export const Default: Story = {};
 
 export const Add: Story = {
   args: {
-    className: 'addBtn',
+    className: "addBtn",
     children: 'Add',
   }
 }

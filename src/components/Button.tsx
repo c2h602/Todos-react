@@ -7,7 +7,6 @@ interface ButtonProps {
 }
 
 const Button = memo(({ children, onClick, className }: ButtonProps) => {
-  console.log(`Button rendered: ${children}`);
   return (
     <button onClick={onClick} className={className}>
       {children}

@@ -36,9 +36,6 @@ export default function List({
   };
 
   const filteredTodos = useMemo(() => {
-    
-    console.log(`useMemo return the filter func`);
-
     return todos.filter((todo) => {
       if (filter === "all") return true;
       return todo.status === filter;
@@ -52,6 +49,7 @@ export default function List({
           <input
             className="input"
             value={newTodo}
+            aria-label="input"
             maxLength={36}
             onChange={(e) => setNewTodo(e.target.value)}
           />
